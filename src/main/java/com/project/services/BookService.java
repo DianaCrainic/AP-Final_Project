@@ -24,12 +24,26 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    private boolean checkIfGameExists(Integer id) {
+    private boolean checkIfBookExists(Integer id) {
         Optional<Book>book = bookRepository.findById(id);
         return book.isPresent();
     }
 
     public void addBook(BookDto bookDto) {
         bookRepository.save(modelMapper.map(bookDto, Book.class));
+    }
+
+//    public void updateBookName(Integer id, String name) {
+//        if (!checkIfBookExists(id)) {
+//            System.out.println("Book with id " + id + " not found");
+//        }
+//        bookRepository.updateName(id, name);
+//    }
+
+    public void deleteBook(Integer id) {
+        if (!checkIfBookExists(id)) {
+            System.out.println("Book with id " + id + " not found");
+        }
+        bookRepository.deleteById(id);
     }
 }

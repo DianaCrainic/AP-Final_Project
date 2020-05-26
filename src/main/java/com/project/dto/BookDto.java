@@ -1,14 +1,8 @@
 package com.project.dto;
 
 import com.project.entities.Author;
-//import com.project.entities.Library;
-import com.sun.istack.NotNull;
+import com.project.entities.Library;
 import lombok.*;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +13,6 @@ public class BookDto {
 
     private Integer id;
     private String title;
-    //private Author author;
-    //private Library library;
+    //private AuthorDto author;
+    //private LibraryDto library;
 }

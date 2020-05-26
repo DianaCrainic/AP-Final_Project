@@ -1,8 +1,6 @@
 package com.project.entities;
 
-import com.sun.istack.NotNull;
 import lombok.*;
-
 import javax.persistence.*;
 
 @AllArgsConstructor
@@ -16,6 +14,12 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
+
+    //@OneToMany(mappedBy = "book")
+    //@JoinColumn(name = "author")
     //private Author author;
-    //private Library library;
+
+//    @ManyToOne
+//    @JoinColumn(name = "library")
+//    private Library library;
 }

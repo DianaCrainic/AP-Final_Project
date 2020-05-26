@@ -26,5 +26,16 @@ public class BookController {
         bookService.addBook(bookDto);
         return new ResponseEntity<>("Book created", HttpStatus.CREATED);
     }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> updateBookName(@PathVariable Integer id, @RequestParam String title) {
+//        bookService.updateBookName(id, title);
+//        return new ResponseEntity<>("Book updated", HttpStatus.OK);
+//    }
+//
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable Integer id) {
+        bookService.deleteBook(id);
+        return new ResponseEntity<>("Book deleted", HttpStatus.OK);
+    }
 }
 
