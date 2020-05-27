@@ -3,6 +3,8 @@ package com.project.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,9 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
+
+    @ManyToMany(mappedBy = "author")
+    private List<Book> book = new ArrayList<>();
+
 
 }

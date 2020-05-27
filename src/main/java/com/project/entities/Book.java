@@ -2,6 +2,8 @@ package com.project.entities;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +17,14 @@ public class Book {
     private Integer id;
     private String title;
 
-    //@OneToMany(mappedBy = "book")
-    //@JoinColumn(name = "author")
-    //private Author author;
+    @ManyToOne
+    @JoinColumn(name = "library", nullable = false)
+    private Library library;
 
-//    @ManyToOne
-//    @JoinColumn(name = "library")
-//    private Library library;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "books_authors",
+                joinColumns = @JoinColumn(name = "book_id"),
+                inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private List<Author> author = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package com.project.controllers;
 
+import com.project.dto.AuthorDto;
 import com.project.dto.BookDto;
 import com.project.entities.Book;
 import com.project.services.BookService;
@@ -26,16 +27,16 @@ public class BookController {
         bookService.addBook(bookDto);
         return new ResponseEntity<>("Book created", HttpStatus.CREATED);
     }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> updateBookName(@PathVariable Integer id, @RequestParam String title) {
-//        bookService.updateBookName(id, title);
-//        return new ResponseEntity<>("Book updated", HttpStatus.OK);
-//    }
+
+//    public ResponseEntity<String> addBookToAuthor(@RequestBody Integer , AuthorDto authorDto){
 //
+//    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
         return new ResponseEntity<>("Book deleted", HttpStatus.OK);
     }
+
 }
 
