@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface BookRepository extends CrudRepository<Book, Integer> {
+
 //    @Transactional
 //    @Modifying
 //    @Query("update Book b set b.title = :title where b.id = :id")

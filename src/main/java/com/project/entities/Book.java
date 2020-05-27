@@ -27,4 +27,20 @@ public class Book {
                 joinColumns = @JoinColumn(name = "book_id"),
                 inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> author = new ArrayList<>();
+
+
+//    public Book findById(Integer id){
+//        Book book = new Book();
+//        if (book.getId() == id){
+//            return book;
+//        }
+//        return null;
+//    }
+//
+//    public void addAuthor(Author a){
+//        if (!author.contains(a)){
+//            author.add(a);
+//            //a.setBook((List<Book>) this);
+//        }
+//    }
 }

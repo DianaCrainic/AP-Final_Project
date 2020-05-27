@@ -28,9 +28,12 @@ public class BookController {
         return new ResponseEntity<>("Book created", HttpStatus.CREATED);
     }
 
-//    public ResponseEntity<String> addBookToAuthor(@RequestBody Integer , AuthorDto authorDto){
-//
-//    }
+    @PostMapping("/{bookId}/authors/{authorId}")
+    public ResponseEntity<String> addBookToAuthor(@PathVariable Integer bookId, @PathVariable Integer authorId){
+        bookService.addBookToAuthor(bookId, authorId);
+        return new ResponseEntity<>("The book and the author were created", HttpStatus.CREATED);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer id) {
