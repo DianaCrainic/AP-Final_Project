@@ -14,11 +14,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Log4j2
-@AllArgsConstructor
 @Service
 public class LibraryService {
-    @Autowired
     private LibraryRepository libraryRepository;
+
+    public LibraryService(LibraryRepository libraryRepository) {
+        this.libraryRepository = libraryRepository;
+    }
+
     private final ModelMapper modelMapper = new ModelMapper();
 
     public List<LibraryDto> getAllLibraries() {

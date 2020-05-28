@@ -16,11 +16,6 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     @Query("update Book b set b.title = :title where b.id = :id")
     void updateTitle(@Param("id") Integer id, @Param("title") String title);
 
-//    @Transactional
-//    @Modifying
-//    @Query("update Book b set b.title = :title where b.id = :id")
-//    void updateName(@Param("id") Integer id, @Param("name") String title);
-
     //TODO: de refacut
 //    @Query("select ba.author from books_authors ba where pg.game.id = :gameId")
 //    List<Author>findAuthorsByGame(@Param("bookId") Integer bookId);

@@ -1,6 +1,5 @@
 package com.project.services;
 
-import com.project.dto.AuthorDto;
 import com.project.dto.BookDto;
 import com.project.entities.Author;
 import com.project.entities.Book;
@@ -20,11 +19,13 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 public class BookService {
-    @Autowired
     private BookRepository bookRepository;
-
-    @Autowired
     private AuthorRepository authorRepository;
+
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+    }
 
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -68,7 +69,7 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book", bookId));
         Author author = authorRepository.findById(authorId).orElseThrow(() -> new EntityNotFoundException("Author", authorId));
 
-        book.getAuthor().add(author);
+        book.getAuthors().add(author);
         bookRepository.save(modelMapper.map(book, Book.class));
 
     }
@@ -98,4 +99,14 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+//    public Set<AuthorDto> getAuthorsForBook(Integer id) {
+//        Set<AuthorDto> authors = authorRepository.findByBook(id)
+//                .stream()
+//                .map(author -> modelMapper.map(author, AuthorDto.class))
+//                .collect(Collectors.toSet());
+//        if (authors.size() == 0){
+//            throw new NoDataFoundException();
+//        }
+//        return authors;
+//    }
 }

@@ -2,10 +2,13 @@ package com.project.services;
 
 import com.project.dto.AuthorDto;
 import com.project.entities.Author;
+import com.project.entities.Book;
+import com.project.exceptions.EntityNotFoundException;
+import com.project.exceptions.NoDataFoundException;
 import com.project.repositories.AuthorRepository;
+import com.project.repositories.BookRepository;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +18,14 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 public class AuthorService {
-    @Autowired
     private AuthorRepository authorRepository;
+    private BookRepository bookRepository;
+
+    public AuthorService(AuthorRepository authorRepository, BookRepository bookRepository) {
+        this.authorRepository = authorRepository;
+        this.bookRepository = bookRepository;
+    }
+
     private final ModelMapper modelMapper = new ModelMapper();
 
     public List<AuthorDto> getAllAuthors() {
@@ -50,5 +59,19 @@ public class AuthorService {
             log.error("Author with id " + id + " not found");
         }
         authorRepository.deleteById(id);
+    }
+
+    public List<AuthorDto> getAuthorsForBook(Integer bookId) {
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book", bookId));
+
+        List<AuthorDto> authors = book.getAuthors()
+                .stream()
+                .map(author -> modelMapper.map(author, AuthorDto.class))
+                .collect(Collectors.toList());
+
+        if (authors.size() == 0) {
+            throw new NoDataFoundException();
+        }
+        return authors;
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -25,12 +24,6 @@ public class BookController {
     public List<BookDto> getAllBooks() {
         return bookService.getAllBooks();
     }
-
-    //TODO: de refacut
-//    @GetMapping("/{id}")
-//    public List<AuthorDto> getAuthorsForBook(@PathVariable Integer id) {
-//        return bookService.getAuthorsForBook(id);
-//    }
 
     @PostMapping
     @ApiOperation(value = "Add a new book")
