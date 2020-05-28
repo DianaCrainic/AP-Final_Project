@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @ToString
 public class BookDto {
-
     private Integer id;
     private String title;
     private LibraryDto library;

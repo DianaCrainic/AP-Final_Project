@@ -4,6 +4,7 @@ import com.project.dto.AuthorDto;
 import com.project.dto.BookDto;
 import com.project.entities.Book;
 import com.project.services.BookService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,24 +19,42 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
+    @ApiOperation(value = "Retrieve all books",
+            response = BookDto.class,
+            responseContainer = "List")
     public List<BookDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
+    //TODO: de refacut
+//    @GetMapping("/{id}")
+//    public List<AuthorDto> getAuthorsForBook(@PathVariable Integer id) {
+//        return bookService.getAuthorsForBook(id);
+//    }
+
     @PostMapping
+    @ApiOperation(value = "Add a new book")
     public ResponseEntity<String> addBook(@RequestBody BookDto bookDto) {
         bookService.addBook(bookDto);
         return new ResponseEntity<>("Book created", HttpStatus.CREATED);
     }
 
     @PostMapping("/{bookId}/authors/{authorId}")
+    @ApiOperation(value = "Add an author to the book")
     public ResponseEntity<String> addBookToAuthor(@PathVariable Integer bookId, @PathVariable Integer authorId){
         bookService.addBookToAuthor(bookId, authorId);
-        return new ResponseEntity<>("The book and the author were created", HttpStatus.CREATED);
+        return new ResponseEntity<>("The author was added to the book", HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Update an existing book title")
+    public ResponseEntity<String> updateBookTitle(@PathVariable Integer id, @RequestParam String title) {
+        bookService.updateBookTitle(id, title);
+        return new ResponseEntity<>("Book updated", HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete a book")
     public ResponseEntity<String> deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
         return new ResponseEntity<>("Book deleted", HttpStatus.OK);

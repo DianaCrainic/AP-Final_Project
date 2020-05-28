@@ -21,12 +21,4 @@ public class Author {
     @ManyToMany(mappedBy = "author")
     private List<Book> book = new ArrayList<>();
 
-    public Author findById(Integer id){
-        Author author = new Author();
-        if (author.getId() == id){
-            return author;
-        }
-        return null;
-    }
-
 }

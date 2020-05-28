@@ -2,6 +2,7 @@ package com.project.controllers;
 
 import com.project.dto.LibraryDto;
 import com.project.services.LibraryService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,15 @@ public class LibraryController {
         return new ResponseEntity<>("Library created", HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Update an existing library name")
+    public ResponseEntity<String> updateLibraryName(@PathVariable Integer id, @RequestParam String name) {
+        libraryService.updateLibraryName(id, name);
+        return new ResponseEntity<>("Library updated", HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    @ApiOperation(value = "Delete a library")
     public ResponseEntity<String> deleteLibrary(@PathVariable Integer id) {
         libraryService.deleteLibrary(id);
         return new ResponseEntity<>("Library created", HttpStatus.OK);

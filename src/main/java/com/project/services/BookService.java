@@ -35,6 +35,18 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    //TODO: de refacut
+//    public List<AuthorDto> getAuthorsForBook(Integer bookId) {
+//        if (!checkIfBookExists(bookId)) {
+//            log.error("Book with id " + bookId + " not found");
+//        }
+//        return (bookRepository.findAuthorsByGame(bookId))
+//                .stream()
+//                .map(author -> modelMapper.map(author, AuthorDto.class))
+//                .collect(Collectors.toList());
+//
+//    }
+
     private boolean checkIfBookExists(Integer id) {
         Optional<Book> book = bookRepository.findById(id);
         return book.isPresent();
@@ -45,23 +57,21 @@ public class BookService {
         return author.isPresent();
     }
 
-    public void addBookToAuthor(Integer bookId, Integer authorId){
-        if(bookId != null && !checkIfBookExists(bookId)){
+    public void addBookToAuthor(Integer bookId, Integer authorId) {
+        if (bookId != null && !checkIfBookExists(bookId)) {
             log.error("Book with id " + bookId + " not found");
         }
-        if (authorId != null && !checkIfAuthorExists(authorId)){
+        if (authorId != null && !checkIfAuthorExists(authorId)) {
             log.error("Author with id " + authorId + " not found");
         }
 
-        Book book = bookRepository.findById(bookId).orElseThrow(()->new EntityNotFoundException("Book", bookId));
-        Author author = authorRepository.findById(authorId).orElseThrow(()->new EntityNotFoundException("Author", authorId));
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book", bookId));
+        Author author = authorRepository.findById(authorId).orElseThrow(() -> new EntityNotFoundException("Author", authorId));
 
         book.getAuthor().add(author);
         bookRepository.save(modelMapper.map(book, Book.class));
 
-
     }
-
 
     public void addBook(BookDto bookDto) {
         bookRepository.save(modelMapper.map(bookDto, Book.class));
@@ -74,12 +84,18 @@ public class BookService {
 //        bookRepository.updateName(id, name);
 //    }
 
+    public void updateBookTitle(Integer id, String title) {
+        if (!checkIfBookExists(id)) {
+            log.error("Book with id " + id + " not found");
+        }
+        bookRepository.updateTitle(id, title);
+    }
+
     public void deleteBook(Integer id) {
         if (!checkIfBookExists(id)) {
             log.error("Book with id " + id + " not found");
         }
         bookRepository.deleteById(id);
     }
-
 
 }

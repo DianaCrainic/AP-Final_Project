@@ -40,10 +40,19 @@ public class LibraryService {
         return library.isPresent();
     }
 
+    public void updateLibraryName(Integer id, String name) {
+        if (!checkIfLibraryExists(id)) {
+            log.error("Library with id " + id + " not found");
+        }
+        libraryRepository.updateName(id, name);
+    }
+
     public void deleteLibrary(Integer id) {
         if (!checkIfLibraryExists(id)) {
             log.error("Library with id " + id + " not found");
         }
         libraryRepository.deleteById(id);
     }
+
+
 }
