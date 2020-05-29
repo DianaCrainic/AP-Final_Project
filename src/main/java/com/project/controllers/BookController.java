@@ -3,6 +3,7 @@ package com.project.controllers;
 import com.project.dto.AuthorDto;
 import com.project.dto.BookDto;
 import com.project.entities.Book;
+import com.project.services.AuthorService;
 import com.project.services.BookService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,23 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private AuthorService authorService;
+
     @GetMapping
     @ApiOperation(value = "Retrieve all books",
             response = BookDto.class,
             responseContainer = "List")
     public List<BookDto> getAllBooks() {
         return bookService.getAllBooks();
+    }
+
+    @GetMapping("/{id}/authors")
+    @ApiOperation(value = "Retrieve all authors of a specified book",
+            response = AuthorDto.class,
+            responseContainer = "List")
+    public List<AuthorDto> getAuthorsForBook(@RequestParam Integer bookId) {
+        return authorService.getAuthorsForBook(bookId);
     }
 
     @PostMapping
