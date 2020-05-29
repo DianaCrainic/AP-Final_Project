@@ -34,7 +34,7 @@ public class BookController {
             response = AuthorDto.class,
             responseContainer = "List")
     public List<AuthorDto> getAuthorsForBook(@RequestParam Integer bookId) {
-        return authorService.getAuthorsForBook(bookId);
+        return bookService.getAuthorsForBook(bookId);
     }
 
     @PostMapping

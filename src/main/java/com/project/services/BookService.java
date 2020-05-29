@@ -1,9 +1,11 @@
 package com.project.services;
 
+import com.project.dto.AuthorDto;
 import com.project.dto.BookDto;
 import com.project.entities.Author;
 import com.project.entities.Book;
 import com.project.exceptions.EntityNotFoundException;
+import com.project.exceptions.NoDataFoundException;
 import com.project.repositories.AuthorRepository;
 import com.project.repositories.BookRepository;
 import lombok.extern.log4j.Log4j2;
@@ -36,18 +38,6 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    //TODO: de refacut
-//    public List<AuthorDto> getAuthorsForBook(Integer bookId) {
-//        if (!checkIfBookExists(bookId)) {
-//            log.error("Book with id " + bookId + " not found");
-//        }
-//        return (bookRepository.findAuthorsByGame(bookId))
-//                .stream()
-//                .map(author -> modelMapper.map(author, AuthorDto.class))
-//                .collect(Collectors.toList());
-//
-//    }
-
     private boolean checkIfBookExists(Integer id) {
         Optional<Book> book = bookRepository.findById(id);
         return book.isPresent();
@@ -78,13 +68,6 @@ public class BookService {
         bookRepository.save(modelMapper.map(bookDto, Book.class));
     }
 
-//    public void updateBookName(Integer id, String name) {
-//        if (!checkIfBookExists(id)) {
-//            System.out.println("Book with id " + id + " not found");
-//        }
-//        bookRepository.updateName(id, name);
-//    }
-
     public void updateBookTitle(Integer id, String title) {
         if (!checkIfBookExists(id)) {
             log.error("Book with id " + id + " not found");
@@ -99,14 +82,18 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-//    public Set<AuthorDto> getAuthorsForBook(Integer id) {
-//        Set<AuthorDto> authors = authorRepository.findByBook(id)
-//                .stream()
-//                .map(author -> modelMapper.map(author, AuthorDto.class))
-//                .collect(Collectors.toSet());
-//        if (authors.size() == 0){
-//            throw new NoDataFoundException();
-//        }
-//        return authors;
-//    }
+    public List<AuthorDto> getAuthorsForBook(Integer bookId) {
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book", bookId));
+
+        List<AuthorDto> authors = book.getAuthors()
+                .stream()
+                .map(author -> modelMapper.map(author, AuthorDto.class))
+                .collect(Collectors.toList());
+
+        if (authors.size() == 0) {
+            throw new NoDataFoundException();
+        }
+        return authors;
+    }
+
 }

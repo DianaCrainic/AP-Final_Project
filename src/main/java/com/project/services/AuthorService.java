@@ -2,9 +2,6 @@ package com.project.services;
 
 import com.project.dto.AuthorDto;
 import com.project.entities.Author;
-import com.project.entities.Book;
-import com.project.exceptions.EntityNotFoundException;
-import com.project.exceptions.NoDataFoundException;
 import com.project.repositories.AuthorRepository;
 import com.project.repositories.BookRepository;
 import lombok.extern.log4j.Log4j2;
@@ -61,17 +58,4 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public List<AuthorDto> getAuthorsForBook(Integer bookId) {
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book", bookId));
-
-        List<AuthorDto> authors = book.getAuthors()
-                .stream()
-                .map(author -> modelMapper.map(author, AuthorDto.class))
-                .collect(Collectors.toList());
-
-        if (authors.size() == 0) {
-            throw new NoDataFoundException();
-        }
-        return authors;
-    }
 }

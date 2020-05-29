@@ -24,14 +24,6 @@ public class AuthorController {
         return authorService.getAllAuthors();
     }
 
-    @GetMapping("/books/{id}")
-    @ApiOperation(value = "Retrieve all authors of a specified book",
-            response = AuthorDto.class,
-            responseContainer = "List")
-    public List<AuthorDto> getAuthorsForBook(@RequestParam Integer bookId) {
-        return authorService.getAuthorsForBook(bookId);
-    }
-
     @PostMapping
     @ApiOperation(value = "Add a new author")
     public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
