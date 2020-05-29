@@ -27,7 +27,7 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "My REST API",
+                "Books Universe",
                 "Some custom description of API.",
                 "API TOS",
                 "Terms of service",
