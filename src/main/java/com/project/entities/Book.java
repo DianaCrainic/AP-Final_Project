@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "books")
-public class Book {
+public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -27,5 +27,8 @@ public class Book {
                 joinColumns = @JoinColumn(name = "book_id"),
                 inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors = new ArrayList<>();
+
+    private Integer review;
+    private Integer price;
 
 }

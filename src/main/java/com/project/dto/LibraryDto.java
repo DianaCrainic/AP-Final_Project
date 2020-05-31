@@ -10,4 +10,5 @@ import lombok.*;
 public class LibraryDto {
     private Integer id;
     private String name;
+    private Integer budget;
 }

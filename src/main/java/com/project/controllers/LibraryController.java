@@ -1,5 +1,6 @@
 package com.project.controllers;
 
+import com.project.dto.BookDto;
 import com.project.dto.LibraryDto;
 import com.project.services.LibraryService;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +24,12 @@ public class LibraryController {
         return libraryService.getAllLibraries();
     }
 
+    @GetMapping("/{libraryId}/authors/{authorId}")
+    public List<BookDto> getAffordableBooksByAuthor(@RequestParam Integer libraryId, @RequestParam Integer authorId) {
+        return libraryService.getAffordableBooksByAuthor(libraryId, authorId);
+    }
+
+
     @PostMapping
     public ResponseEntity<String> addLibrary(@RequestBody LibraryDto libraryDto) {
         libraryService.addLibrary(libraryDto);
@@ -42,4 +49,6 @@ public class LibraryController {
         libraryService.deleteLibrary(id);
         return new ResponseEntity<>("Library created", HttpStatus.OK);
     }
+
+
 }

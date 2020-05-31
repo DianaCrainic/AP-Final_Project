@@ -14,4 +14,6 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
+    private Integer budget;
+
 }

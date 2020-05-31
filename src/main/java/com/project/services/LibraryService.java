@@ -1,7 +1,14 @@
 package com.project.services;
 
+import com.project.algorithm.DynamicProgrammingAlgorithm;
+import com.project.dto.AuthorDto;
+import com.project.dto.BookDto;
 import com.project.dto.LibraryDto;
+import com.project.entities.Author;
+import com.project.entities.Book;
 import com.project.entities.Library;
+import com.project.exceptions.EntityNotFoundException;
+import com.project.repositories.AuthorRepository;
 import com.project.repositories.LibraryRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -9,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,9 +25,11 @@ import java.util.stream.Collectors;
 @Service
 public class LibraryService {
     private LibraryRepository libraryRepository;
+    private AuthorRepository authorRepository;
 
-    public LibraryService(LibraryRepository libraryRepository) {
+    public LibraryService(LibraryRepository libraryRepository, AuthorRepository authorRepository) {
         this.libraryRepository = libraryRepository;
+        this.authorRepository = authorRepository;
     }
 
     private final ModelMapper modelMapper = new ModelMapper();
@@ -57,5 +67,19 @@ public class LibraryService {
         libraryRepository.deleteById(id);
     }
 
+    public List<BookDto> getAffordableBooksByAuthor(Integer libraryId, Integer authorId) {
 
+        Library library = libraryRepository.findById(libraryId).orElseThrow(() -> new EntityNotFoundException("Library", libraryId));
+
+        Author author = authorRepository.findById(authorId).orElseThrow(() -> new EntityNotFoundException("Author", authorId));
+        List<Book> bookByThisAuthor = author.getBooks();
+
+        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+
+        return dp.solve(library, bookByThisAuthor)
+                .stream()
+                .map(book -> modelMapper.map(book, BookDto.class))
+                .collect(Collectors.toList());
+
+    }
 }
