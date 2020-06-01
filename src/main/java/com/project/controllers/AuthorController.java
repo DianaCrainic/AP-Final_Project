@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Author Controller
+ */
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {

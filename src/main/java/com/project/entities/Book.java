@@ -5,6 +5,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Book entity
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

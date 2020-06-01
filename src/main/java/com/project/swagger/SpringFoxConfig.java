@@ -12,6 +12,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+/**
+ * Spring Fox Configuration
+ */
 @Configuration
 @EnableSwagger2
 public class SpringFoxConfig {

@@ -1,19 +1,24 @@
 package com.project;
 
-import com.project.algorithm.DynamicProgrammingAlgorithm;
+import com.project.algorithm.BestBooksForLibraryAlgorithm;
 import com.project.entities.Author;
 import com.project.entities.Book;
 import com.project.entities.Library;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tests for the Algorithm
+ */
 @SpringBootTest
 class ProjectApplicationTests {
 
+    /**
+     * Testing the results for a list of books by an author and a library with a budget
+     */
     @Test
     void test1Algorithm() {
         Library library = new Library();
@@ -24,7 +29,6 @@ class ProjectApplicationTests {
         List<Author> authors = new ArrayList<>();
         Author author = new Author();
         author.setId(6);
-        author.setName("Roald Dahl");
         authors.add(author);
 
         Book book1 = new Book();
@@ -64,7 +68,7 @@ class ProjectApplicationTests {
 
         author.setBooks(books);
 
-        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+        BestBooksForLibraryAlgorithm dp = new BestBooksForLibraryAlgorithm();
         List<Book> bookList = dp.solve(library, books);
 
         List<Book> expectedBookList = new ArrayList<>();
@@ -76,6 +80,10 @@ class ProjectApplicationTests {
 
     }
 
+
+    /**
+     * Testing the results for a list of books by an author and a library with a different budget
+     */
     @Test
     void test2Algorithm() {
         Library library = new Library();
@@ -126,7 +134,7 @@ class ProjectApplicationTests {
 
         author.setBooks(books);
 
-        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+        BestBooksForLibraryAlgorithm dp = new BestBooksForLibraryAlgorithm();
 
         List<Book> bookList = dp.solve(library, books);
 
@@ -138,6 +146,9 @@ class ProjectApplicationTests {
 
     }
 
+    /**
+     * Testing the behaviour of the app when the budget of the library is null
+     */
     @Test
     void test3Algorithm() {
         Library library = new Library();
@@ -148,7 +159,6 @@ class ProjectApplicationTests {
         List<Author> authors = new ArrayList<>();
         Author author = new Author();
         author.setId(6);
-        author.setName("Roald Dahl");
         authors.add(author);
 
         Book book1 = new Book();
@@ -188,7 +198,7 @@ class ProjectApplicationTests {
 
         author.setBooks(books);
 
-        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+        BestBooksForLibraryAlgorithm dp = new BestBooksForLibraryAlgorithm();
 
         List<Book> bookList = dp.solve(library, books);
 
@@ -196,6 +206,9 @@ class ProjectApplicationTests {
 
     }
 
+    /**
+     * Testing the behaviour of the app when the the list of books is empty
+     */
     @Test
     void test4Algorithm() {
         Library library = new Library();
@@ -206,12 +219,11 @@ class ProjectApplicationTests {
         List<Author> authors = new ArrayList<>();
         Author author = new Author();
         author.setId(6);
-        author.setName("Roald Dahl");
         authors.add(author);
 
         author.setBooks(books);
 
-        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+        BestBooksForLibraryAlgorithm dp = new BestBooksForLibraryAlgorithm();
 
         List<Book> bookList = dp.solve(library, books);
 
@@ -219,6 +231,10 @@ class ProjectApplicationTests {
 
     }
 
+    /**
+     * Testing the behaviour of the app when the budget of the library is null and the list of books
+     * is empty
+     */
     @Test
     void test5Algorithm() {
         Library library = new Library();
@@ -233,7 +249,7 @@ class ProjectApplicationTests {
 
         author.setBooks(books);
 
-        DynamicProgrammingAlgorithm dp = new DynamicProgrammingAlgorithm();
+        BestBooksForLibraryAlgorithm dp = new BestBooksForLibraryAlgorithm();
 
         List<Book> bookList = dp.solve(library, books);
 

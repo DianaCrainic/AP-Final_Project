@@ -6,17 +6,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
 import javax.transaction.Transactional;
-import java.util.List;
 
+/**
+ * Book Repository
+ */
 public interface BookRepository extends CrudRepository<Book, Integer> {
     @Transactional
     @Modifying
     @Query("update Book b set b.title = :title where b.id = :id")
     void updateTitle(@Param("id") Integer id, @Param("title") String title);
 
-    //TODO: de refacut
-//    @Query("select ba.author from books_authors ba where pg.game.id = :gameId")
-//    List<Author>findAuthorsByGame(@Param("bookId") Integer bookId);
 }

@@ -2,6 +2,9 @@ package com.project.dto;
 
 import lombok.*;
 
+/**
+ * Data Transfer Object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

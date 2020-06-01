@@ -1,9 +1,10 @@
 package com.project.dto;
 
-import com.project.entities.Author;
-import com.project.entities.Library;
 import lombok.*;
 
+/**
+ * Book Data Transfer Object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

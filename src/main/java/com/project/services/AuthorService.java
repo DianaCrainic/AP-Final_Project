@@ -7,11 +7,13 @@ import com.project.repositories.BookRepository;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Author Service
+ */
 @Log4j2
 @Service
 public class AuthorService {

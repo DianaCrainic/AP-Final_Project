@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
-import java.util.Set;
 
+/**
+ * Author Repository
+ */
 public interface AuthorRepository extends CrudRepository<Author, Integer> {
     @Transactional
     @Modifying

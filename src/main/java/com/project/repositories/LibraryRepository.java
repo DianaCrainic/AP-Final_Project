@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 
+/**
+ * Library Repository
+ */
 public interface LibraryRepository extends CrudRepository<Library, Integer> {
     @Transactional
     @Modifying
