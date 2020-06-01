@@ -18,3 +18,7 @@ Spring Boot Application using Spring Data JPA
 
 ## Use-Case: Library
 ![Use-Case3](https://github.com/DianaCrainic/AP-Final_Project/blob/master/Diagrams/Use-Cases/Use-Case_Library.png?raw=true)
+
+## Tests
+![Tests](https://github.com/DianaCrainic/AP-Final_Project/blob/master/Testing/Tests.png?raw=true)
+
