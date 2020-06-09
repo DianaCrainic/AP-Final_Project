@@ -43,7 +43,6 @@
    - Configuration: **src/main/java/com/project/swagger/SpringFoxConfig.java**
    
  :heavy_check_mark: Deployment using [Heroku](https://heroku.com/)
-   - Configuration: **src/main/java/com/project/swagger/SpringFoxConfig.java**
   
 
 ## UML Diagram - Classes
